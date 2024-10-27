@@ -1,5 +1,5 @@
 {
-  "name": "Scrim-s03gdrleep",
+  "name": "text-summarizer",
   "description": "https://v2.scrimba.com/claude-ai-c09gsmkso3/~0q3",
   "scripts": {
     "start": "vite",
@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.1",
+    "dotenv": "^16.4.5",
     "vite": "latest"
   }
 }
