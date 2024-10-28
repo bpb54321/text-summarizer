@@ -1,5 +1,6 @@
-// Import the http module
 import http from "http";
+import "dotenv/config";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const parseRequestBody = (req) => {
   return new Promise((resolve, reject) => {
@@ -30,11 +31,20 @@ const port = 3000;
 // Create the server
 const server = http.createServer(async (req, res) => {
   if (req.url === "/ai-response" && req.method === "POST") {
+    // Process request
     const parsedBody = await parseRequestBody(req);
     const { prompt } = parsedBody;
+
+    // Call Google Gemini
+    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const geminiResult = await model.generateContent(prompt);
+
+    // Response
     res.setHeader("Content-Type", "application/json");
     const responseBody = {
-      message: prompt,
+      summary: geminiResult.response.text(),
     };
     res.statusCode = 200;
     res.end(JSON.stringify(responseBody));
