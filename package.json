@@ -1,6 +1,7 @@
 {
   "name": "text-summarizer",
   "description": "https://v2.scrimba.com/claude-ai-c09gsmkso3/~0q3",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "dev": "vite",
