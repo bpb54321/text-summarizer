@@ -1,22 +1,25 @@
-# Getting Started
+# Text Summarizer
 
-Install the dependencies and run the project
+A simple application that uses a GAI service (currently Google Gemini) to summarize text. Based on the Scrimba course (Intro to Claude)[https://v2.scrimba.com/claude-ai-c09gsmkso3/~0xf2]. Ironically, Claude no longer offers a free tier for its API, which is why the application uses Google Gemini.
+
+## Running the application
+
+Install dependencies.
 
 ```
 npm install
-npm start
 ```
 
-Head over to https://vitejs.dev/ to learn more about configuring vite
+Add a Google Gemini API key to the environment variable `GOOGLE_GEMINI_API_KEY` in the `.env` file (not version controlled).
 
-## About Scrimba
+Run the back-end server
 
-At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
-If we succeed with this, it will give anyone who wants to become a software developer a realistic shot at succeeding, regardless of where they live and the size of their wallets 🎉
-The Frontend Developer Career Path aims to teach you everything you need to become a Junior Developer, or you could take a deep-dive with one of our advanced courses 🚀
+```
+npm run start:server
+```
 
-- [Our courses](https://scrimba.com/allcourses)
-- [The Frontend Career Path](https://scrimba.com/learn/frontend)
-- [Become a Scrimba Pro member](https://scrimba.com/pricing)
+Run the front-end application
 
-Happy Coding!
+```
+npm run start
+```
