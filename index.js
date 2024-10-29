@@ -1,13 +1,5 @@
-import Anthropic from "@anthropic-ai/sdk";
-
 // Constants
 const feedbackDisplayTime = 3000;
-
-// Initialize Anthropic API SDK
-const anthropic = new Anthropic({
-  apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
-  dangerouslyAllowBrowser: true,
-});
 
 // Element Selectors
 const textInputArea = document.getElementById("text-input-area");
@@ -39,13 +31,6 @@ summaryLengthInput.addEventListener("input", updateSummaryLengthText);
 
 // Button Event Handlers
 async function summarize() {
-  displayLoadingSection();
-  const msg = await anthropic.messages.create({
-    model: "claude-3-5-sonnet-20241022",
-    max_tokens: 1024,
-    messages: [{ role: "user", content: "Hello, Claude" }],
-  });
-  console.log(msg);
   hideLoadingSection();
 }
 
