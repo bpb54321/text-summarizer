@@ -29,8 +29,33 @@ document.addEventListener("DOMContentLoaded", handleDomContentLoaded);
 textInputArea.addEventListener("input", scrollTextAreaToTopAndEnableControls);
 summaryLengthInput.addEventListener("input", updateSummaryLengthText);
 
+async function getSummary(textToSummarize) {
+  try {
+    const requestBody = {
+      text: textToSummarize,
+    };
+    const response = await fetch("http://localhost:3000/summarize", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const responseBody = await response.json();
+    const { summary } = responseBody;
+    summaryOutputArea.value = summary;
+  } catch (error) {
+    console.error("There was a problem summarizing the text");
+  }
+}
+
 // Button Event Handlers
 async function summarize() {
+  const summary = await getSummary(textInputArea.value);
   hideLoadingSection();
 }
 

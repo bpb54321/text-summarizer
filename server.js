@@ -30,10 +30,17 @@ const port = 3000;
 
 // Create the server
 const server = http.createServer(async (req, res) => {
-  if (req.url === "/ai-response" && req.method === "POST") {
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+    "Access-Control-Max-Age": 2592000, // 30 days
+    "Access-Control-Allow-Headers": "*",
+  };
+  if (req.url === "/summarize" && req.method === "POST") {
     // Process request
     const parsedBody = await parseRequestBody(req);
-    const { prompt } = parsedBody;
+    const { text } = parsedBody;
+    const prompt = `Please summarize the following text:\n${text}`;
 
     // Call Google Gemini
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
@@ -42,12 +49,18 @@ const server = http.createServer(async (req, res) => {
     const geminiResult = await model.generateContent(prompt);
 
     // Response
-    res.setHeader("Content-Type", "application/json");
     const responseBody = {
       summary: geminiResult.response.text(),
     };
+    res.writeHead(200, {
+      ...corsHeaders,
+      "Content-Type": "application/json",
+    });
     res.statusCode = 200;
     res.end(JSON.stringify(responseBody));
+  } else if (req.method === "OPTIONS") {
+    res.writeHead(204, corsHeaders);
+    res.end();
   } else {
     res.statusCode = 404;
     res.end("The route was not found");
