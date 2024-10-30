@@ -39,8 +39,8 @@ const server = http.createServer(async (req, res) => {
   if (req.url === "/summarize" && req.method === "POST") {
     // Process request
     const parsedBody = await parseRequestBody(req);
-    const { text } = parsedBody;
-    const prompt = `Please summarize the following text:\n${text}`;
+    const { text, wordLimit } = parsedBody;
+    const prompt = `Please summarize the following text using ${wordLimit} words:\n${text}`;
 
     // Call Google Gemini
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);

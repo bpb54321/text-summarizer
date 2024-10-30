@@ -29,10 +29,11 @@ document.addEventListener("DOMContentLoaded", handleDomContentLoaded);
 textInputArea.addEventListener("input", scrollTextAreaToTopAndEnableControls);
 summaryLengthInput.addEventListener("input", updateSummaryLengthText);
 
-async function getSummary(textToSummarize) {
+async function getSummary(textToSummarize, wordLimit) {
   try {
     const requestBody = {
       text: textToSummarize,
+      wordLimit,
     };
     const response = await fetch("http://localhost:3000/summarize", {
       method: "POST",
@@ -55,7 +56,10 @@ async function getSummary(textToSummarize) {
 
 // Button Event Handlers
 async function summarize() {
-  const summary = await getSummary(textInputArea.value);
+  const summary = await getSummary(
+    textInputArea.value,
+    summaryLengthInput.value
+  );
   hideLoadingSection();
 }
 
