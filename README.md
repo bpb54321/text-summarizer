@@ -1,6 +1,6 @@
 # Text Summarizer
 
-A simple application that uses a GAI service (currently Google Gemini) to summarize text. Based on the Scrimba course (Intro to Claude)[https://v2.scrimba.com/claude-ai-c09gsmkso3/~0xf2]. Ironically, Claude no longer offers a free tier for its API, which is why the application uses Google Gemini.
+A simple application that uses a GAI service (currently Google Gemini) to summarize text. Based on the Scrimba course [Intro to Claude](https://v2.scrimba.com/claude-ai-c09gsmkso3/~0xf2). Ironically, Claude no longer offers a free tier for its API, which is why the application uses Google Gemini.
 
 ## Running the application
 
